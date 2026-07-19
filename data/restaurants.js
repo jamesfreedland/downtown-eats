@@ -1395,5 +1395,1463 @@ window.RESTAURANTS = [
    "mexican"
   ],
   "id": 82
+ },
+ {
+  "name": "Prince Street Pizza",
+  "address": "27 Prince St, New York, NY 10012",
+  "lat": 40.7230823,
+  "lng": -73.9945374,
+  "rating": 4.4,
+  "reviews": 8900,
+  "price": "$",
+  "platform": "walk-in",
+  "book_url": "https://princestreetpizza.com/order/",
+  "resy_slug": null,
+  "note": "The famous spicy-spring Sicilian square, line out the door",
+  "categories": [
+   "pizza"
+  ],
+  "id": 83,
+  "source": "suggested"
+ },
+ {
+  "name": "Song' E Napule",
+  "address": "132 W Houston St, New York, NY 10012",
+  "lat": 40.7279839,
+  "lng": -74.0013566,
+  "rating": 4.7,
+  "reviews": 2617,
+  "price": "$$",
+  "platform": "opentable",
+  "book_url": "https://www.opentable.com/r/song-e-napule-132-w-houston-st-new-york",
+  "resy_slug": null,
+  "note": "Gambero Rosso-winning Neapolitan pies from a true Naples crew",
+  "categories": [
+   "pizza"
+  ],
+  "id": 84,
+  "source": "suggested"
+ },
+ {
+  "name": "Pasquale Jones",
+  "address": "187 Mulberry St, New York, NY 10012",
+  "lat": 40.7210069,
+  "lng": -73.9967529,
+  "rating": 4.4,
+  "reviews": 756,
+  "price": "$$$",
+  "platform": "resy",
+  "book_url": "https://resy.com/cities/new-york-ny/venues/pasquale-jones",
+  "resy_slug": "pasquale-jones",
+  "note": "Wood-fired clam pie + serious wine list",
+  "categories": [
+   "pizza"
+  ],
+  "id": 85,
+  "source": "suggested"
+ },
+ {
+  "name": "Emily West Village",
+  "address": "35 Downing St, New York, NY 10014",
+  "lat": 40.7293542,
+  "lng": -74.0038432,
+  "rating": 4.5,
+  "reviews": null,
+  "price": "$$",
+  "platform": "resy",
+  "book_url": "https://resy.com/cities/new-york-ny/venues/emily-west-village",
+  "resy_slug": "emily-west-village",
+  "note": "Detroit-style pies plus the cult Emmy burger",
+  "categories": [
+   "pizza"
+  ],
+  "id": 86,
+  "source": "suggested"
+ },
+ {
+  "name": "Motorino",
+  "address": "349 E 12th St, New York, NY 10003",
+  "lat": 40.7303178,
+  "lng": -73.983858,
+  "rating": 4.4,
+  "reviews": null,
+  "price": "$$",
+  "platform": "resy",
+  "book_url": "https://resy.com/cities/new-york-ny/venues/motorino",
+  "resy_slug": "motorino",
+  "note": "Wood-fired Neapolitan standby, EV original since 2009",
+  "categories": [
+   "pizza"
+  ],
+  "id": 87,
+  "source": "suggested"
+ },
+ {
+  "name": "Arturo's Coal Oven Pizza",
+  "address": "106 W Houston St, New York, NY 10012",
+  "lat": 40.7273991,
+  "lng": -74.0003974,
+  "rating": 4.5,
+  "reviews": null,
+  "price": "$$",
+  "platform": "walk-in",
+  "book_url": "https://www.arturoscoaloven.com/",
+  "resy_slug": null,
+  "note": "Coal-oven pies with live jazz, Village institution since 1957",
+  "categories": [
+   "pizza"
+  ],
+  "id": 88,
+  "source": "suggested"
+ },
+ {
+  "name": "Ribalta",
+  "address": "48 E 12th St, New York, NY 10003",
+  "lat": 40.733256,
+  "lng": -73.9914891,
+  "rating": 4.4,
+  "reviews": 2736,
+  "price": "$$",
+  "platform": "opentable",
+  "book_url": "https://www.opentable.com/r/ribalta-new-york",
+  "resy_slug": null,
+  "note": "Neapolitan near Union Square; Napoli match-day hub",
+  "categories": [
+   "pizza"
+  ],
+  "id": 89,
+  "source": "suggested"
+ },
+ {
+  "name": "Supermoon Bakehouse",
+  "address": "120 Rivington St, New York, NY 10002",
+  "lat": 40.7199094,
+  "lng": -73.9871913,
+  "rating": 4.6,
+  "reviews": 4100,
+  "price": "$$",
+  "platform": "walk-in",
+  "book_url": "https://www.supermoonbakehouse.com/",
+  "resy_slug": null,
+  "note": "LES cruffin/croissant lab with Aussie flair",
+  "categories": [
+   "bagels"
+  ],
+  "id": 90,
+  "source": "suggested"
+ },
+ {
+  "name": "Eileen's Special Cheesecake",
+  "address": "17 Cleveland Pl, New York, NY 10012",
+  "lat": 40.7215412,
+  "lng": -73.9971169,
+  "rating": 4.6,
+  "reviews": 3900,
+  "price": "$$",
+  "platform": "walk-in",
+  "book_url": "https://www.eileenscheesecake.com/",
+  "resy_slug": null,
+  "note": "Nolita cheesecake institution since 1976",
+  "categories": [
+   "bagels"
+  ],
+  "id": 91,
+  "source": "suggested"
+ },
+ {
+  "name": "Caffè Panna",
+  "address": "77 Irving Pl, New York, NY 10003",
+  "lat": 40.7369641,
+  "lng": -73.9868018,
+  "rating": 4.6,
+  "reviews": 2000,
+  "price": "$$",
+  "platform": "walk-in",
+  "book_url": "https://www.caffepanna.com/",
+  "resy_slug": null,
+  "note": "Gramercy's line-out-the-door daily-flavor ice cream",
+  "categories": [
+   "bagels"
+  ],
+  "id": 92,
+  "source": "suggested"
+ },
+ {
+  "name": "Lady Wong",
+  "address": "332 E 9th St, New York, NY 10003",
+  "lat": 40.7285023,
+  "lng": -73.9861401,
+  "rating": 4.6,
+  "reviews": 480,
+  "price": "$$",
+  "platform": "walk-in",
+  "book_url": "https://www.ladywong.com/",
+  "resy_slug": null,
+  "note": "Southeast Asian kuih and entremets by Jean-Georges alums",
+  "categories": [
+   "bagels"
+  ],
+  "id": 93,
+  "source": "suggested"
+ },
+ {
+  "name": "Petee's Pie Company",
+  "address": "61 Delancey St, New York, NY 10002",
+  "lat": 40.7191154,
+  "lng": -73.9908405,
+  "rating": 4.6,
+  "reviews": 1800,
+  "price": "$$",
+  "platform": "walk-in",
+  "book_url": "https://peteespie.com/",
+  "resy_slug": null,
+  "note": "Best-in-city sweet and savory pies by the slice",
+  "categories": [
+   "bagels"
+  ],
+  "id": 94,
+  "source": "suggested"
+ },
+ {
+  "name": "Dominique Ansel Bakery",
+  "address": "189 Spring St, New York, NY 10012",
+  "lat": 40.7251997,
+  "lng": -74.0029229,
+  "rating": 4.3,
+  "reviews": 8726,
+  "price": "$$",
+  "platform": "walk-in",
+  "book_url": "https://www.dominiqueanselny.com/",
+  "resy_slug": null,
+  "note": "James Beard winner; Cronut and DKA original in SoHo",
+  "categories": [
+   "bagels"
+  ],
+  "id": 95,
+  "source": "suggested"
+ },
+ {
+  "name": "Lafayette Grand Café & Bakery",
+  "address": "380 Lafayette St, New York, NY 10003",
+  "lat": 40.7276085,
+  "lng": -73.9937902,
+  "rating": 4.2,
+  "reviews": 5000,
+  "price": "$$$",
+  "platform": "resy",
+  "book_url": "https://resy.com/cities/new-york-ny/venues/lafayette-grand-cafe-and-bakery",
+  "resy_slug": "lafayette-grand-cafe-and-bakery",
+  "note": "Carmellini's NoHo grand café; home of the Suprême croissant",
+  "categories": [
+   "bagels"
+  ],
+  "id": 96,
+  "source": "suggested"
+ },
+ {
+  "name": "Sushi Nakazawa",
+  "address": "23 Commerce St, New York, NY 10014",
+  "lat": 40.731742,
+  "lng": -74.004534,
+  "rating": 4.5,
+  "reviews": 1956,
+  "price": "$$$$",
+  "platform": "resy",
+  "book_url": "https://resy.com/cities/new-york-ny/venues/sushi-nakazawa",
+  "resy_slug": "sushi-nakazawa",
+  "note": "Michelin-starred omakase counter, NYT four stars",
+  "categories": [
+   "sushi"
+  ],
+  "id": 97,
+  "source": "suggested"
+ },
+ {
+  "name": "Nami Nori",
+  "address": "33 Carmine St, New York, NY 10014",
+  "lat": 40.730263,
+  "lng": -74.003294,
+  "rating": 4.4,
+  "reviews": 1864,
+  "price": "$$",
+  "platform": "opentable",
+  "book_url": "https://www.opentable.com/r/nami-nori-west-village-new-york",
+  "resy_slug": null,
+  "note": "Bib Gourmand temaki bar in the West Village",
+  "categories": [
+   "sushi"
+  ],
+  "id": 98,
+  "source": "suggested"
+ },
+ {
+  "name": "Domodomo",
+  "address": "140 W Houston St, New York, NY 10012",
+  "lat": 40.728029,
+  "lng": -74.001662,
+  "rating": 4.5,
+  "reviews": 1508,
+  "price": "$$$",
+  "platform": "resy",
+  "book_url": "https://resy.com/cities/new-york-ny/venues/domodomo-new-york",
+  "resy_slug": "domodomo-new-york",
+  "note": "Bib Gourmand hand-roll omakase",
+  "categories": [
+   "sushi"
+  ],
+  "id": 99,
+  "source": "suggested"
+ },
+ {
+  "name": "15 East at Tocqueville",
+  "address": "1 E 15th St, New York, NY 10003",
+  "lat": 40.736617,
+  "lng": -73.992722,
+  "rating": 4.4,
+  "reviews": 607,
+  "price": "$$$$",
+  "platform": "resy",
+  "book_url": "https://resy.com/cities/new-york-ny/venues/15-east-at-tocqueville",
+  "resy_slug": "15-east-at-tocqueville",
+  "note": "Sushi counter meets French-Japanese kitchen off Union Square",
+  "categories": [
+   "sushi"
+  ],
+  "id": 100,
+  "source": "suggested"
+ },
+ {
+  "name": "Noda",
+  "address": "37 W 20th St, New York, NY 10011",
+  "lat": 40.740815,
+  "lng": -73.993098,
+  "rating": 4.7,
+  "reviews": 171,
+  "price": "$$$$",
+  "platform": "other",
+  "book_url": "https://www.exploretock.com/noda-nyc",
+  "resy_slug": null,
+  "note": "Michelin-starred 20-course edomae omakase, books on Tock",
+  "categories": [
+   "sushi"
+  ],
+  "id": 101,
+  "source": "suggested"
+ },
+ {
+  "name": "Blue Ribbon Sushi",
+  "address": "119 Sullivan St, New York, NY 10012",
+  "lat": 40.726064,
+  "lng": -74.002402,
+  "rating": 4.6,
+  "reviews": 1892,
+  "price": "$$$",
+  "platform": "opentable",
+  "book_url": "https://www.opentable.com/r/blue-ribbon-sushi-sullivan-st-new-york",
+  "resy_slug": null,
+  "note": "SoHo institution since 1995, open past midnight",
+  "categories": [
+   "sushi"
+  ],
+  "id": 102,
+  "source": "suggested"
+ },
+ {
+  "name": "Takahachi",
+  "address": "85 Avenue A, New York, NY 10009",
+  "lat": 40.725327,
+  "lng": -73.984447,
+  "rating": 4.5,
+  "reviews": 624,
+  "price": "$$",
+  "platform": "walk-in",
+  "book_url": "https://www.takahachieastvillage.net/",
+  "resy_slug": null,
+  "note": "Three-decade East Village neighborhood sushi standby",
+  "categories": [
+   "sushi"
+  ],
+  "id": 103,
+  "source": "suggested"
+ },
+ {
+  "name": "Bungalow",
+  "address": "24 1st Ave, New York, NY 10009",
+  "lat": 40.7236539,
+  "lng": -73.9879543,
+  "rating": 4.4,
+  "reviews": 2635,
+  "price": "$$$",
+  "platform": "resy",
+  "book_url": "https://resy.com/cities/new-york-ny/venues/bungalow-ny",
+  "resy_slug": "bungalow-ny",
+  "note": "Vikas Khanna's Michelin-Guide Indian clubhouse smash",
+  "categories": [
+   "asian"
+  ],
+  "id": 104,
+  "source": "suggested"
+ },
+ {
+  "name": "Fish Cheeks",
+  "address": "55 Bond St, New York, NY 10012",
+  "lat": 40.7257377,
+  "lng": -73.9927035,
+  "rating": 4.7,
+  "reviews": 5337,
+  "price": "$$",
+  "platform": "resy",
+  "book_url": "https://resy.com/cities/new-york-ny/venues/fish-cheeks",
+  "resy_slug": "fish-cheeks",
+  "note": "Thai seafood – coconut crab curry, holds walk-in tables",
+  "categories": [
+   "asian"
+  ],
+  "id": 105,
+  "source": "suggested"
+ },
+ {
+  "name": "Bangkok Supper Club",
+  "address": "641 Hudson St, New York, NY 10014",
+  "lat": 40.7390267,
+  "lng": -74.0058009,
+  "rating": 4.5,
+  "reviews": 777,
+  "price": "$$$",
+  "platform": "resy",
+  "book_url": "https://resy.com/cities/new-york-ny/venues/bangkok-supper-club",
+  "resy_slug": "bangkok-supper-club",
+  "note": "Michelin-Guide modern Thai, late-night Bangkok energy",
+  "categories": [
+   "asian"
+  ],
+  "id": 106,
+  "source": "suggested"
+ },
+ {
+  "name": "Potluck Club",
+  "address": "133 Chrystie St, New York, NY 10002",
+  "lat": 40.7195768,
+  "lng": -73.9935236,
+  "rating": 4.6,
+  "reviews": 734,
+  "price": "$$",
+  "platform": "opentable",
+  "book_url": "https://www.opentable.com/r/potluck-club-new-york",
+  "resy_slug": null,
+  "note": "Cantonese-American Bib Gourmand – salt & pepper fried chicken",
+  "categories": [
+   "asian"
+  ],
+  "id": 107,
+  "source": "suggested"
+ },
+ {
+  "name": "Uncle Lou",
+  "address": "73 Mulberry St, New York, NY 10013",
+  "lat": 40.7162837,
+  "lng": -73.9993899,
+  "rating": 4.5,
+  "reviews": 2684,
+  "price": "$$",
+  "platform": "walk-in",
+  "book_url": null,
+  "resy_slug": null,
+  "note": "Old-school Cantonese banquet in Chinatown",
+  "categories": [
+   "asian"
+  ],
+  "id": 108,
+  "source": "suggested"
+ },
+ {
+  "name": "Madame Vo",
+  "address": "212 E 10th St, New York, NY 10003",
+  "lat": 40.7292749,
+  "lng": -73.9860922,
+  "rating": 4.5,
+  "reviews": 1515,
+  "price": "$$",
+  "platform": "resy",
+  "book_url": "https://resy.com/cities/new-york-ny/venues/madame-vo-nyc",
+  "resy_slug": "madame-vo-nyc",
+  "note": "Southern Vietnamese – long-simmered pho and bo kho, EV staple",
+  "categories": [
+   "asian"
+  ],
+  "id": 109,
+  "source": "suggested"
+ },
+ {
+  "name": "Hanoi House",
+  "address": "119 St Marks Pl, New York, NY 10009",
+  "lat": 40.7270978,
+  "lng": -73.9834781,
+  "rating": 4.5,
+  "reviews": 1358,
+  "price": "$$",
+  "platform": "resy",
+  "book_url": "https://resy.com/cities/new-york-ny/venues/hanoi-house",
+  "resy_slug": "hanoi-house",
+  "note": "Northern Vietnamese – NYT-loved house special pho",
+  "categories": [
+   "asian"
+  ],
+  "id": 110,
+  "source": "suggested"
+ },
+ {
+  "name": "Yopparai",
+  "address": "49 Clinton St, New York, NY 10002",
+  "lat": 40.7197566,
+  "lng": -73.9849835,
+  "rating": 4.5,
+  "reviews": 483,
+  "price": "$$$",
+  "platform": "opentable",
+  "book_url": "https://www.opentable.com/yopparai",
+  "resy_slug": null,
+  "note": "Hidden LES sake izakaya behind an unmarked door",
+  "categories": [
+   "asian"
+  ],
+  "id": 111,
+  "source": "suggested"
+ },
+ {
+  "name": "Kiki's",
+  "address": "130 Division St, New York, NY 10002",
+  "lat": 40.7145315,
+  "lng": -73.9919097,
+  "rating": 4.4,
+  "reviews": 2444,
+  "price": "$$",
+  "platform": "walk-in",
+  "book_url": "https://kikisnyc.com/",
+  "resy_slug": null,
+  "note": "No-reservations Greek taverna, Dimes Square staple",
+  "categories": [
+   "mediterranean"
+  ],
+  "id": 112,
+  "source": "suggested"
+ },
+ {
+  "name": "Balaboosta",
+  "address": "611 Hudson St, New York, NY 10014",
+  "lat": 40.7376851,
+  "lng": -74.005842,
+  "rating": 4.4,
+  "reviews": 1006,
+  "price": "$$$",
+  "platform": "resy",
+  "book_url": "https://resy.com/cities/new-york-ny/venues/balaboosta",
+  "resy_slug": "balaboosta",
+  "note": "Einat Admony's Israeli-Mediterranean in the West Village",
+  "categories": [
+   "mediterranean"
+  ],
+  "id": 113,
+  "source": "suggested"
+ },
+ {
+  "name": "Kubeh",
+  "address": "464 6th Ave, New York, NY 10011",
+  "lat": 40.7354601,
+  "lng": -73.9980005,
+  "rating": 4.3,
+  "reviews": 947,
+  "price": "$$",
+  "platform": "resy",
+  "book_url": "https://resy.com/cities/new-york-ny/venues/kubeh",
+  "resy_slug": "kubeh",
+  "note": "Kurdish-Iraqi kubeh dumplings, Michelin Guide-listed",
+  "categories": [
+   "mediterranean"
+  ],
+  "id": 114,
+  "source": "suggested"
+ },
+ {
+  "name": "Zizi",
+  "address": "182 8th Ave, New York, NY 10011",
+  "lat": 40.7429148,
+  "lng": -73.9999442,
+  "rating": 4.6,
+  "reviews": 968,
+  "price": "$$$",
+  "platform": "resy",
+  "book_url": "https://resy.com/cities/new-york-ny/venues/zizi",
+  "resy_slug": "zizi",
+  "note": "Modern Israeli-Mediterranean with late-night Chelsea energy",
+  "categories": [
+   "mediterranean"
+  ],
+  "id": 115,
+  "source": "suggested"
+ },
+ {
+  "name": "Shoo Shoo Nolita",
+  "address": "371 Broome St, New York, NY 10013",
+  "lat": 40.7201124,
+  "lng": -73.9961673,
+  "rating": 4.5,
+  "reviews": 812,
+  "price": "$$",
+  "platform": "opentable",
+  "book_url": "https://www.opentable.com/r/shoo-shoo-new-york",
+  "resy_slug": null,
+  "note": "Tel Aviv cafe-style Israeli mezze in Nolita",
+  "categories": [
+   "mediterranean"
+  ],
+  "id": 116,
+  "source": "suggested"
+ },
+ {
+  "name": "Barbounia",
+  "address": "250 Park Ave S, New York, NY 10003",
+  "lat": 40.7381944,
+  "lng": -73.9880991,
+  "rating": 4.7,
+  "reviews": 4962,
+  "price": "$$$",
+  "platform": "opentable",
+  "book_url": "https://www.opentable.com/barbounia",
+  "resy_slug": null,
+  "note": "Big, lively Greek-Mediterranean room on Park Ave South",
+  "categories": [
+   "mediterranean"
+  ],
+  "id": 117,
+  "source": "suggested"
+ },
+ {
+  "name": "Sami & Susu",
+  "address": "190 Orchard St, New York, NY 10002",
+  "lat": 40.7220847,
+  "lng": -73.987989,
+  "rating": 4.6,
+  "reviews": 200,
+  "price": "$$$",
+  "platform": "resy",
+  "book_url": "https://resy.com/cities/new-york-ny/venues/sami-and-susu",
+  "resy_slug": "sami-and-susu",
+  "note": "Bib Gourmand Mediterranean wine bar, rotating small plates",
+  "categories": [
+   "mediterranean"
+  ],
+  "id": 118,
+  "source": "suggested"
+ },
+ {
+  "name": "Union Square Cafe",
+  "address": "101 E 19th St, New York, NY 10003",
+  "lat": 40.73775,
+  "lng": -73.98797,
+  "rating": 4.6,
+  "reviews": 3900,
+  "price": "$$$",
+  "platform": "opentable",
+  "book_url": "https://www.opentable.com/r/union-square-cafe",
+  "resy_slug": null,
+  "note": "Danny Meyer's 1985 New American original, warm as ever",
+  "categories": [
+   "american"
+  ],
+  "id": 119,
+  "source": "suggested"
+ },
+ {
+  "name": "The Commerce Inn",
+  "address": "50 Commerce St, New York, NY 10014",
+  "lat": 40.73148,
+  "lng": -74.0057,
+  "rating": 4.4,
+  "reviews": 490,
+  "price": "$$$",
+  "platform": "resy",
+  "book_url": "https://resy.com/cities/new-york-ny/venues/the-commerce-inn",
+  "resy_slug": "the-commerce-inn",
+  "note": "Sodi/Williams Shaker tavern – early-American cooking by candlelight",
+  "categories": [
+   "american"
+  ],
+  "id": 120,
+  "source": "suggested"
+ },
+ {
+  "name": "Corner Bar",
+  "address": "60 Canal St, New York, NY 10002",
+  "lat": 40.7149,
+  "lng": -73.99228,
+  "rating": 4.5,
+  "reviews": 800,
+  "price": "$$$",
+  "platform": "opentable",
+  "book_url": "https://www.opentable.com/r/corner-bar-new-york",
+  "resy_slug": null,
+  "note": "Estela team's American bistro at Nine Orchard, killer burger",
+  "categories": [
+   "american"
+  ],
+  "id": 121,
+  "source": "suggested"
+ },
+ {
+  "name": "Estela",
+  "address": "47 E Houston St, New York, NY 10012",
+  "lat": 40.72463,
+  "lng": -73.99477,
+  "rating": 4.4,
+  "reviews": 1800,
+  "price": "$$$$",
+  "platform": "resy",
+  "book_url": "https://resy.com/cities/new-york-ny/venues/estela",
+  "resy_slug": "estela",
+  "note": "Michelin-starred small-plates standard-setter above Houston St",
+  "categories": [
+   "american"
+  ],
+  "id": 122,
+  "source": "suggested"
+ },
+ {
+  "name": "Minetta Tavern",
+  "address": "113 MacDougal St, New York, NY 10012",
+  "lat": 40.72997,
+  "lng": -74.00063,
+  "rating": 4.4,
+  "reviews": 3400,
+  "price": "$$$$",
+  "platform": "resy",
+  "book_url": "https://resy.com/cities/new-york-ny/venues/minetta-tavern",
+  "resy_slug": "minetta-tavern",
+  "note": "1937 Village tavern – Black Label burger, tables gone in seconds",
+  "categories": [
+   "american"
+  ],
+  "id": 123,
+  "source": "suggested"
+ },
+ {
+  "name": "Golden Diner",
+  "address": "123 Madison St, New York, NY 10002",
+  "lat": 40.71242,
+  "lng": -73.99412,
+  "rating": 4.4,
+  "reviews": 2000,
+  "price": "$$",
+  "platform": "resy",
+  "book_url": "https://resy.com/cities/new-york-ny/venues/golden-diner",
+  "resy_slug": "golden-diner",
+  "note": "Asian-inflected Two Bridges diner – honey butter pancakes",
+  "categories": [
+   "american"
+  ],
+  "id": 124,
+  "source": "suggested"
+ },
+ {
+  "name": "Katz's Delicatessen",
+  "address": "205 E Houston St, New York, NY 10002",
+  "lat": 40.72234,
+  "lng": -73.98735,
+  "rating": 4.5,
+  "reviews": 51600,
+  "price": "$$",
+  "platform": "walk-in",
+  "book_url": "https://katzsdelicatessen.com",
+  "resy_slug": null,
+  "note": "The pastrami benchmark since 1888 – ticket system, no reservations",
+  "categories": [
+   "american"
+  ],
+  "id": 125,
+  "source": "suggested"
+ },
+ {
+  "name": "I Sodi",
+  "address": "314 Bleecker St, New York, NY 10014",
+  "lat": 40.732794,
+  "lng": -74.00403,
+  "rating": 4.2,
+  "reviews": 1075,
+  "price": "$$$",
+  "platform": "resy",
+  "book_url": "https://resy.com/cities/new-york-ny/venues/i-sodi",
+  "resy_slug": "i-sodi",
+  "note": "Rita Sodi's Tuscan flagship (Via Carota sister), lasagna al forno",
+  "categories": [
+   "italian"
+  ],
+  "id": 126,
+  "source": "suggested"
+ },
+ {
+  "name": "Don Angie",
+  "address": "103 Greenwich Ave, New York, NY 10014",
+  "lat": 40.737804,
+  "lng": -74.001993,
+  "rating": 4.6,
+  "reviews": 1533,
+  "price": "$$$",
+  "platform": "resy",
+  "book_url": "https://resy.com/cities/new-york-ny/venues/don-angie",
+  "resy_slug": "don-angie",
+  "note": "Glammed-up Italian-American, famed pinwheel lasagna",
+  "categories": [
+   "italian"
+  ],
+  "id": 127,
+  "source": "suggested"
+ },
+ {
+  "name": "L'Artusi",
+  "address": "228 W 10th St, New York, NY 10014",
+  "lat": 40.733715,
+  "lng": -74.005122,
+  "rating": 4.6,
+  "reviews": 2612,
+  "price": "$$$",
+  "platform": "resy",
+  "book_url": "https://resy.com/cities/new-york-ny/venues/lartusi-ny",
+  "resy_slug": "lartusi-ny",
+  "note": "West Village pasta-and-wine stalwart, cacio e pepe",
+  "categories": [
+   "italian"
+  ],
+  "id": 128,
+  "source": "suggested"
+ },
+ {
+  "name": "Emilio's Ballato",
+  "address": "55 E Houston St, New York, NY 10012",
+  "lat": 40.724479,
+  "lng": -73.994369,
+  "rating": 4.1,
+  "reviews": 1679,
+  "price": "$$$",
+  "platform": "walk-in",
+  "book_url": "https://www.emiliosballato.com/",
+  "resy_slug": null,
+  "note": "Celebrity red-sauce institution since 1956, walk-in only",
+  "categories": [
+   "italian"
+  ],
+  "id": 129,
+  "source": "suggested"
+ },
+ {
+  "name": "Roscioli NYC",
+  "address": "43 MacDougal St, New York, NY 10012",
+  "lat": 40.727725,
+  "lng": -74.002552,
+  "rating": 4.4,
+  "reviews": 743,
+  "price": "$$$",
+  "platform": "sevenrooms",
+  "book_url": "https://www.sevenrooms.com/explore/rosciolinyc/reservations/create/search",
+  "resy_slug": null,
+  "note": "Rome's famed salumeria in SoHo – carbonara, wine cellar",
+  "categories": [
+   "italian"
+  ],
+  "id": 130,
+  "source": "suggested"
+ },
+ {
+  "name": "Malatesta Trattoria",
+  "address": "649 Washington St, New York, NY 10014",
+  "lat": 40.732827,
+  "lng": -74.008457,
+  "rating": 4.4,
+  "reviews": 1135,
+  "price": "$$",
+  "platform": "walk-in",
+  "book_url": "https://www.malatestanyc.com/",
+  "resy_slug": null,
+  "note": "Cash-only far-West-Village trattoria, piadine and gnocchi",
+  "categories": [
+   "italian"
+  ],
+  "id": 131,
+  "source": "suggested"
+ },
+ {
+  "name": "Supper",
+  "address": "156 E 2nd St, New York, NY 10009",
+  "lat": 40.722962,
+  "lng": -73.985214,
+  "rating": 4.4,
+  "reviews": 1297,
+  "price": "$$",
+  "platform": "resy",
+  "book_url": "https://resy.com/cities/new-york-ny/venues/supper",
+  "resy_slug": "supper",
+  "note": "Candlelit East Village Prisinzano spot, spaghetti al limone, cash only",
+  "categories": [
+   "italian"
+  ],
+  "id": 132,
+  "source": "suggested"
+ },
+ {
+  "name": "Corima",
+  "address": "3 Allen St, New York, NY 10002",
+  "lat": 40.7146828,
+  "lng": -73.9931273,
+  "rating": 4.4,
+  "reviews": 296,
+  "price": "$$$$",
+  "platform": "resy",
+  "book_url": "https://resy.com/cities/new-york-ny/venues/corima",
+  "resy_slug": "corima",
+  "note": "Michelin-starred progressive Norteño, LES/Two Bridges",
+  "categories": [
+   "mexican"
+  ],
+  "id": 133,
+  "source": "suggested"
+ },
+ {
+  "name": "Los Tacos No. 1 (Tribeca)",
+  "address": "136 Church St, New York, NY 10007",
+  "lat": 40.7142382,
+  "lng": -74.008694,
+  "rating": 4.8,
+  "reviews": 4100,
+  "price": "$",
+  "platform": "walk-in",
+  "book_url": "https://www.lostacos1.com/location/tribeca/",
+  "resy_slug": null,
+  "note": "Tijuana-style adobada on handmade tortillas",
+  "categories": [
+   "mexican"
+  ],
+  "id": 134,
+  "source": "suggested"
+ },
+ {
+  "name": "Los Mariscos",
+  "address": "409 W 15th St (Chelsea Market), New York, NY 10011",
+  "lat": 40.7420724,
+  "lng": -74.0056455,
+  "rating": 4.7,
+  "reviews": 3029,
+  "price": "$$",
+  "platform": "walk-in",
+  "book_url": "https://www.losmariscos1.com/",
+  "resy_slug": null,
+  "note": "Baja fish tacos and aguachile from the Los Tacos No. 1 team",
+  "categories": [
+   "mexican"
+  ],
+  "id": 135,
+  "source": "suggested"
+ },
+ {
+  "name": "Zaragoza Mexican Deli",
+  "address": "215 Avenue A, New York, NY 10009",
+  "lat": 40.73006,
+  "lng": -73.9809243,
+  "rating": 4.7,
+  "reviews": 235,
+  "price": "$",
+  "platform": "walk-in",
+  "book_url": "https://www.yelp.com/biz/zaragoza-mexican-deli-and-grocery-new-york",
+  "resy_slug": null,
+  "note": "Tiny East Village bodega-counter tacos, cult local institution",
+  "categories": [
+   "mexican"
+  ],
+  "id": 136,
+  "source": "suggested"
+ },
+ {
+  "name": "La Contenta LES",
+  "address": "102 Norfolk St, New York, NY 10002",
+  "lat": 40.7187462,
+  "lng": -73.9869705,
+  "rating": 4.6,
+  "reviews": 1154,
+  "price": "$$",
+  "platform": "resy",
+  "book_url": "https://resy.com/cities/new-york-ny/venues/la-contenta-les",
+  "resy_slug": "la-contenta-les",
+  "note": "14-seat LES den for mole poblano and deep mezcal list",
+  "categories": [
+   "mexican"
+  ],
+  "id": 137,
+  "source": "suggested"
+ },
+ {
+  "name": "Ofrenda",
+  "address": "113 7th Ave S, New York, NY 10014",
+  "lat": 40.7339349,
+  "lng": -74.0023333,
+  "rating": 4.5,
+  "reviews": 1269,
+  "price": "$$",
+  "platform": "opentable",
+  "book_url": "https://www.opentable.com/ofrenda-reservations-new-york?restref=47473",
+  "resy_slug": null,
+  "note": "West Village cantina – regional Mexican, standout margaritas",
+  "categories": [
+   "mexican"
+  ],
+  "id": 138,
+  "source": "suggested"
+ },
+ {
+  "name": "Veselka",
+  "address": "144 2nd Ave, New York, NY 10003",
+  "lat": 40.7289775,
+  "lng": -73.9869985,
+  "rating": 4.6,
+  "reviews": 7822,
+  "price": "$$",
+  "platform": "resy",
+  "book_url": "https://resy.com/cities/new-york-ny/venues/veselka-east-village",
+  "resy_slug": "veselka-east-village",
+  "note": "Ukrainian – 1954 borscht-and-pierogi institution",
+  "categories": [
+   "world"
+  ],
+  "id": 139,
+  "source": "suggested"
+ },
+ {
+  "name": "Little Poland",
+  "address": "200 2nd Ave, New York, NY 10003",
+  "lat": 40.7312257,
+  "lng": -73.9854838,
+  "rating": 4.4,
+  "reviews": 1194,
+  "price": "$",
+  "platform": "walk-in",
+  "book_url": null,
+  "resy_slug": null,
+  "note": "Polish – last old-school pierogi diner left in Manhattan",
+  "categories": [
+   "world"
+  ],
+  "id": 140,
+  "source": "suggested"
+ },
+ {
+  "name": "Chama Mama",
+  "address": "149 W 14th St, New York, NY 10011",
+  "lat": 40.7384827,
+  "lng": -73.9988578,
+  "rating": 4.6,
+  "reviews": 2158,
+  "price": "$$",
+  "platform": "resy",
+  "book_url": "https://resy.com/cities/new-york-ny/venues/chama-mama-chelsea",
+  "resy_slug": "chama-mama-chelsea",
+  "note": "Georgian – Michelin-listed khachapuri and qvevri wines",
+  "categories": [
+   "world"
+  ],
+  "id": 141,
+  "source": "suggested"
+ },
+ {
+  "name": "Boucherie West Village",
+  "address": "99 7th Ave S, New York, NY 10014",
+  "lat": 40.7330542,
+  "lng": -74.0029005,
+  "rating": 4.8,
+  "reviews": 8977,
+  "price": "$$$",
+  "platform": "opentable",
+  "book_url": "https://www.opentable.com/r/boucherie-new-york",
+  "resy_slug": null,
+  "note": "French bistro – steak frites and bourguignon",
+  "categories": [
+   "world"
+  ],
+  "id": 142,
+  "source": "suggested"
+ },
+ {
+  "name": "Boqueria Soho",
+  "address": "171 Spring St, New York, NY 10012",
+  "lat": 40.7248962,
+  "lng": -74.0021454,
+  "rating": 4.5,
+  "reviews": 2000,
+  "price": "$$$",
+  "platform": "opentable",
+  "book_url": "https://www.opentable.com/boqueria-soho",
+  "resy_slug": null,
+  "note": "Spanish tapas – Barcelona-style bar, paella and gambas",
+  "categories": [
+   "world"
+  ],
+  "id": 143,
+  "source": "suggested"
+ },
+ {
+  "name": "Cervo's",
+  "address": "43 Canal St, New York, NY 10002",
+  "lat": 40.7148957,
+  "lng": -73.9913229,
+  "rating": 4.5,
+  "reviews": 618,
+  "price": "$$$",
+  "platform": "resy",
+  "book_url": "https://resy.com/cities/new-york-ny/venues/cervos",
+  "resy_slug": "cervos",
+  "note": "Portuguese – Iberian-coast seafood and natural wine, Dimes Square",
+  "categories": [
+   "world"
+  ],
+  "id": 144,
+  "source": "suggested"
+ },
+ {
+  "name": "Wallsé",
+  "address": "344 W 11th St, New York, NY 10014",
+  "lat": 40.7354186,
+  "lng": -74.0082138,
+  "rating": 4.4,
+  "reviews": 521,
+  "price": "$$$$",
+  "platform": "opentable",
+  "book_url": "https://www.opentable.com/r/wallse",
+  "resy_slug": null,
+  "note": "Austrian – fine-dining schnitzel since 2000",
+  "categories": [
+   "world"
+  ],
+  "id": 145,
+  "source": "suggested"
+ },
+ {
+  "name": "Smør",
+  "address": "441 E 12th St, New York, NY 10009",
+  "lat": 40.7292966,
+  "lng": -73.9815283,
+  "rating": 4.6,
+  "reviews": 600,
+  "price": "$$",
+  "platform": "resy",
+  "book_url": "https://resy.com/cities/ny/smor",
+  "resy_slug": "smor",
+  "note": "Scandinavian – Danish-run smørrebrød and herring, all day",
+  "categories": [
+   "world"
+  ],
+  "id": 146,
+  "source": "suggested"
+ },
+ {
+  "name": "Mission Ceviche",
+  "address": "7 E 17th St, New York, NY 10003",
+  "lat": 40.7376943,
+  "lng": -73.9914376,
+  "rating": 4.4,
+  "reviews": 400,
+  "price": "$$$",
+  "platform": "opentable",
+  "book_url": "https://www.opentable.com/r/mission-ceviche-union-square-new-york",
+  "resy_slug": null,
+  "note": "Peruvian – Michelin-Guide ceviche bar off Union Square",
+  "categories": [
+   "world"
+  ],
+  "id": 147,
+  "source": "suggested"
+ },
+ {
+  "name": "Buenos Aires",
+  "address": "513 E 6th St, New York, NY 10009",
+  "lat": 40.7252709,
+  "lng": -73.9830682,
+  "rating": 4.6,
+  "reviews": 1530,
+  "price": "$$$",
+  "platform": "opentable",
+  "book_url": "https://www.opentable.com/r/buenos-aires-new-york",
+  "resy_slug": null,
+  "note": "Argentine – parrilla steaks, 100+ Argentine wines",
+  "categories": [
+   "world"
+  ],
+  "id": 148,
+  "source": "suggested"
+ },
+ {
+  "name": "Berimbau Brazilian Table",
+  "address": "43 Carmine St, New York, NY 10014",
+  "lat": 40.7301381,
+  "lng": -74.0037019,
+  "rating": 4.6,
+  "reviews": 1563,
+  "price": "$$",
+  "platform": "resy",
+  "book_url": "https://resy.com/cities/new-york-ny/venues/berimbau-brazilian-table",
+  "resy_slug": "berimbau-brazilian-table",
+  "note": "Brazilian – feijoada and cachaça cocktails on Carmine St",
+  "categories": [
+   "world"
+  ],
+  "id": 149,
+  "source": "suggested"
+ },
+ {
+  "name": "Patacon Pisao",
+  "address": "139 Essex St, New York, NY 10002",
+  "lat": 40.7197733,
+  "lng": -73.987861,
+  "rating": 4.5,
+  "reviews": 900,
+  "price": "$",
+  "platform": "walk-in",
+  "book_url": null,
+  "resy_slug": null,
+  "note": "Venezuelan – arepas, cachapas and the namesake patacón, open late",
+  "categories": [
+   "world"
+  ],
+  "id": 150,
+  "source": "suggested"
+ },
+ {
+  "name": "Cafe Habana",
+  "address": "17 Prince St, New York, NY 10012",
+  "lat": 40.7228449,
+  "lng": -73.9942284,
+  "rating": 4.6,
+  "reviews": 4000,
+  "price": "$$",
+  "platform": "walk-in",
+  "book_url": null,
+  "resy_slug": null,
+  "note": "Cuban – Nolita corner classic, grilled corn and Cubanos since 1998",
+  "categories": [
+   "world"
+  ],
+  "id": 151,
+  "source": "suggested"
+ },
+ {
+  "name": "El Castillo de Jagua",
+  "address": "113 Rivington St, New York, NY 10002",
+  "lat": 40.7191,
+  "lng": -73.9883,
+  "rating": 4.4,
+  "reviews": 1453,
+  "price": "$",
+  "platform": "resy",
+  "book_url": "https://resy.com/cities/new-york-ny/venues/el-castillo-de-jagua-restaurant",
+  "resy_slug": "el-castillo-de-jagua-restaurant",
+  "note": "Dominican – 44-year LES mofongo and pernil stalwart",
+  "categories": [
+   "world"
+  ],
+  "id": 152,
+  "source": "suggested"
+ },
+ {
+  "name": "Miss Lily's 7A",
+  "address": "109 Avenue A, New York, NY 10009",
+  "lat": 40.7260148,
+  "lng": -73.9837501,
+  "rating": 4.3,
+  "reviews": 1200,
+  "price": "$$",
+  "platform": "opentable",
+  "book_url": "https://www.opentable.com/r/miss-lilys-7a",
+  "resy_slug": null,
+  "note": "Jamaican – jerk chicken and dancehall energy on Avenue A",
+  "categories": [
+   "world"
+  ],
+  "id": 153,
+  "source": "suggested"
+ },
+ {
+  "name": "Cafe Himalaya",
+  "address": "78 E 1st St, New York, NY 10009",
+  "lat": 40.72322,
+  "lng": -73.98794,
+  "rating": 4.7,
+  "reviews": 600,
+  "price": "$",
+  "platform": "walk-in",
+  "book_url": null,
+  "resy_slug": null,
+  "note": "Tibetan – hand-folded beef momos in a tiny East Village storefront",
+  "categories": [
+   "world"
+  ],
+  "id": 154,
+  "source": "suggested"
+ },
+ {
+  "name": "Taste From Everest",
+  "address": "102 Lexington Ave, New York, NY 10016",
+  "lat": 40.74226,
+  "lng": -73.98301,
+  "rating": 4.4,
+  "reviews": 500,
+  "price": "$$",
+  "platform": "walk-in",
+  "book_url": null,
+  "resy_slug": null,
+  "note": "Nepali – scratch-made momos and goat curry on Curry Hill",
+  "categories": [
+   "world"
+  ],
+  "id": 155,
+  "source": "suggested"
+ },
+ {
+  "name": "COTE Korean Steakhouse",
+  "address": "16 W 22nd St, New York, NY 10010",
+  "lat": 40.74105,
+  "lng": -73.99142,
+  "rating": 4.6,
+  "reviews": 8000,
+  "price": "$$$$",
+  "platform": "resy",
+  "book_url": "https://resy.com/cities/new-york-ny/venues/cote-nyc",
+  "resy_slug": "cote-nyc",
+  "note": "Korean – Michelin-starred KBBQ-steakhouse hybrid, Butcher's Feast",
+  "categories": [
+   "world"
+  ],
+  "id": 156,
+  "source": "suggested"
+ },
+ {
+  "name": "Naks",
+  "address": "201 1st Ave, New York, NY 10003",
+  "lat": 40.73033,
+  "lng": -73.98365,
+  "rating": 4.7,
+  "reviews": 400,
+  "price": "$$$",
+  "platform": "resy",
+  "book_url": "https://resy.com/cities/new-york-ny/venues/naks",
+  "resy_slug": "naks",
+  "note": "Filipino – kamayan feast from Unapologetic Foods",
+  "categories": [
+   "world"
+  ],
+  "id": 157,
+  "source": "suggested"
+ },
+ {
+  "name": "Kopitiam",
+  "address": "151 E Broadway, New York, NY 10002",
+  "lat": 40.7138,
+  "lng": -73.9909,
+  "rating": 4.3,
+  "reviews": 1400,
+  "price": "$",
+  "platform": "walk-in",
+  "book_url": null,
+  "resy_slug": null,
+  "note": "Malaysian – Nyonya kopitiam classics, kaya toast and nasi lemak",
+  "categories": [
+   "world"
+  ],
+  "id": 158,
+  "source": "suggested"
+ },
+ {
+  "name": "Wayan",
+  "address": "20 Spring St, New York, NY 10012",
+  "lat": 40.72124,
+  "lng": -73.99514,
+  "rating": 4.4,
+  "reviews": 1000,
+  "price": "$$$",
+  "platform": "opentable",
+  "book_url": "https://www.opentable.com/r/wayan-nyc-new-york",
+  "resy_slug": null,
+  "note": "Indonesian – Cedric Vongerichten's French-Indonesian sharing plates",
+  "categories": [
+   "world"
+  ],
+  "id": 159,
+  "source": "suggested"
+ },
+ {
+  "name": "Sigiri",
+  "address": "91 1st Ave, New York, NY 10003",
+  "lat": 40.72623,
+  "lng": -73.98662,
+  "rating": 4.5,
+  "reviews": 1300,
+  "price": "$$",
+  "platform": "opentable",
+  "book_url": "https://www.opentable.com/r/sigiri-sri-lanka-restaurant-new-york",
+  "resy_slug": null,
+  "note": "Sri Lankan – hoppers and fiery kottu roti, BYOB cash-only",
+  "categories": [
+   "world"
+  ],
+  "id": 160,
+  "source": "suggested"
+ },
+ {
+  "name": "Farida Downtown",
+  "address": "32 Cedar St, New York, NY 10005",
+  "lat": 40.70712,
+  "lng": -74.00845,
+  "rating": 4.5,
+  "reviews": 700,
+  "price": "$$",
+  "platform": "opentable",
+  "book_url": "https://www.opentable.com/r/farida-downtown-new-york",
+  "resy_slug": null,
+  "note": "Uzbek – plov and shashlik in a painted FiDi grotto",
+  "categories": [
+   "world"
+  ],
+  "id": 161,
+  "source": "suggested"
+ },
+ {
+  "name": "Pera Soho",
+  "address": "54 Thompson St, New York, NY 10012",
+  "lat": 40.72389,
+  "lng": -74.00332,
+  "rating": 4.5,
+  "reviews": 1200,
+  "price": "$$$",
+  "platform": "opentable",
+  "book_url": "https://www.opentable.com/r/pera-soho-new-york",
+  "resy_slug": null,
+  "note": "Turkish – refined meze and whole branzino in SoHo since 2004",
+  "categories": [
+   "world"
+  ],
+  "id": 162,
+  "source": "suggested"
+ },
+ {
+  "name": "ilili",
+  "address": "236 5th Ave, New York, NY 10001",
+  "lat": 40.74437,
+  "lng": -73.98779,
+  "rating": 4.6,
+  "reviews": 6500,
+  "price": "$$$",
+  "platform": "opentable",
+  "book_url": "https://www.opentable.com/r/ilili-new-york",
+  "resy_slug": null,
+  "note": "Lebanese – NoMad mezze institution, 17 years running",
+  "categories": [
+   "world"
+  ],
+  "id": 163,
+  "source": "suggested"
  }
 ];
