@@ -80,6 +80,11 @@
   .card-name { font-weight: 650; font-size: 15px; }
   .card-emoji { font-size: 15px; }
   .card-price { color: var(--muted); font-size: 12.5px; margin-left: auto; }
+  .badge-sug {
+    font-size: 9.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+    color: var(--amber); background: #fdf1e3; border-radius: 5px; padding: 2px 6px;
+    align-self: center; white-space: nowrap;
+  }
   .card-meta { display: flex; gap: 8px; align-items: center; margin-top: 3px; font-size: 12.5px; color: var(--muted); flex-wrap: wrap; }
   .stars { color: var(--amber); font-weight: 650; }
   .card-note { font-size: 12.5px; color: var(--muted); margin-top: 4px; font-style: italic; }
@@ -107,6 +112,7 @@
     transform: rotate(0deg);
   }
   .marker-pin.dim { opacity: .25; filter: grayscale(1); }
+  .marker-pin.sug { border-color: var(--amber); }
   .leaflet-popup-content { margin: 10px 14px; font-family: inherit; }
   .pop-name { font-weight: 700; font-size: 14px; }
   .pop-meta { font-size: 12px; color: var(--muted); margin-top: 2px; }
@@ -151,6 +157,11 @@
       <option value="$$$">$$$</option>
       <option value="$$$$">$$$$</option>
     </select>
+    <select id="source">
+      <option value="">Full board</option>
+      <option value="mine">My list</option>
+      <option value="suggested">Suggested</option>
+    </select>
     <select id="platform">
       <option value="">Any booking</option>
       <option value="resy">Resy</option>
@@ -182,13 +193,14 @@ const CATS = [
   { key: "american",      label: "🍳 American" },
   { key: "italian",       label: "🍝 Italian" },
   { key: "mexican",       label: "🌮 Mexican" },
+  { key: "world",         label: "🌍 World" },
 ];
 const EMOJI = Object.fromEntries(CATS.map(c => [c.key, c.label.split(" ")[0]]));
 
 const DATA = (window.RESTAURANTS || []).filter(r => r.lat && r.lng);
 const AV = window.AVAILABILITY || null;
 
-const state = { cat: null, q: "", minRating: 0, price: "", platform: "", availOnly: false };
+const state = { cat: null, q: "", minRating: 0, price: "", platform: "", availOnly: false, source: "" };
 
 // ---- availability helpers ----
 function todayKey() {
@@ -225,6 +237,8 @@ function availState(r) {
 function visible() {
   return DATA.filter(r => {
     if (state.cat && !r.categories.includes(state.cat)) return false;
+    if (state.source === "mine" && r.source === "suggested") return false;
+    if (state.source === "suggested" && r.source !== "suggested") return false;
     if (state.q && !(r.name + " " + (r.note||"") + " " + r.address).toLowerCase().includes(state.q)) return false;
     if (state.minRating && (!r.rating || r.rating < state.minRating)) return false;
     if (state.price && r.price !== state.price) return false;
@@ -244,7 +258,7 @@ const markers = new Map();
 DATA.forEach(r => {
   const icon = L.divIcon({
     className: "", iconSize: [30, 30], iconAnchor: [15, 28], popupAnchor: [0, -26],
-    html: `<div class="marker-pin" id="pin-${r.id}">${EMOJI[r.categories[0]] || "📍"}</div>`,
+    html: `<div class="marker-pin${r.source === "suggested" ? " sug" : ""}" id="pin-${r.id}">${EMOJI[r.categories[0]] || "📍"}</div>`,
   });
   const m = L.marker([r.lat, r.lng], { icon }).addTo(map);
   m.bindPopup(popupHtml(r));
@@ -300,6 +314,7 @@ function render() {
         <div class="card-top">
           <span class="card-emoji">${r.categories.map(c => EMOJI[c]).join("")}</span>
           <span class="card-name">${r.name}</span>
+          ${r.source === "suggested" ? `<span class="badge-sug">suggested</span>` : ""}
           <span class="card-price">${r.price || ""}</span>
         </div>
         <div class="card-meta">
@@ -342,6 +357,7 @@ document.getElementById("q").addEventListener("input", e => { state.q = e.target
 document.getElementById("minRating").addEventListener("change", e => { state.minRating = +e.target.value; render(); });
 document.getElementById("price").addEventListener("change", e => { state.price = e.target.value; render(); });
 document.getElementById("platform").addEventListener("change", e => { state.platform = e.target.value; render(); });
+document.getElementById("source").addEventListener("change", e => { state.source = e.target.value; render(); });
 document.getElementById("availToggle").addEventListener("click", e => {
   state.availOnly = !state.availOnly;
   e.target.classList.toggle("on", state.availOnly);
