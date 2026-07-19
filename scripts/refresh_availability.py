@@ -168,7 +168,9 @@ def main():
     for offset in range(ndays):
         day = (date.today() + timedelta(days=offset)).isoformat()
         out = {}
-        for r in restaurants:
+        # venues with no data yet go first, so rate-limited runs fill gaps
+        ordered = sorted(restaurants, key=lambda r: r["name"] in prev_days.get(day, {}))
+        for r in ordered:
             name, plat = r["name"], r.get("platform")
             if not ((plat == "resy" and r.get("resy_slug")) or
                     (plat in ("opentable", "sevenrooms") and r.get("book_url"))):

@@ -123,8 +123,7 @@
     .layout { flex-direction: column; }
     .list { width: 100%; min-width: 0; flex: 1; }
     #map { height: 44vh; flex: none; order: -1; }
-    body.list-hidden .list { display: none; }
-    body.list-hidden #map { height: calc(100vh - 190px); }
+    body.map-hidden #map { display: none; }
     .mobile-switch {
       display: block; position: fixed; bottom: 14px; left: 50%; transform: translateX(-50%);
       z-index: 2000; background: var(--ink); color: #fff; border: none;
@@ -178,7 +177,7 @@
   <div class="list" id="list"></div>
   <div id="map"></div>
 </div>
-<button class="mobile-switch" id="mswitch">Hide list</button>
+<button class="mobile-switch" id="mswitch">Hide map</button>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="data/restaurants.js"></script>
@@ -363,11 +362,17 @@ document.getElementById("availToggle").addEventListener("click", e => {
   e.target.classList.toggle("on", state.availOnly);
   render();
 });
-document.getElementById("mswitch").addEventListener("click", e => {
-  document.body.classList.toggle("list-hidden");
-  e.target.textContent = document.body.classList.contains("list-hidden") ? "Show list" : "Hide list";
-  setTimeout(() => map.invalidateSize(), 50);
-});
+function setMapHidden(hidden) {
+  document.body.classList.toggle("map-hidden", hidden);
+  document.getElementById("mswitch").textContent = hidden ? "Show map" : "Hide map";
+  try { localStorage.setItem("downtownEatsMapHidden", hidden ? "1" : "0"); } catch (e) {}
+  if (!hidden) setTimeout(() => map.invalidateSize(), 50);
+}
+document.getElementById("mswitch").addEventListener("click", () =>
+  setMapHidden(!document.body.classList.contains("map-hidden")));
+try {
+  if (localStorage.getItem("downtownEatsMapHidden") === "1") setMapHidden(true);
+} catch (e) {}
 
 // ---- stamp ----
 (function () {
