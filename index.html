@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Downtown Eats — Gramercy & Downtown Manhattan</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗽</text></svg>">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  :root {
+    --bg: #faf7f2;
+    --card: #ffffff;
+    --ink: #1f2421;
+    --muted: #6b7280;
+    --line: #e7e2d9;
+    --accent: #1a7a5e;
+    --accent-soft: #e3f2ec;
+    --amber: #b45309;
+    --chip: #f1ede5;
+    --shadow: 0 1px 3px rgba(31,36,33,.08), 0 4px 14px rgba(31,36,33,.06);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg); color: var(--ink);
+    display: flex; flex-direction: column;
+  }
+  header {
+    padding: 14px 18px 10px;
+    border-bottom: 1px solid var(--line);
+    background: var(--card);
+    z-index: 1000;
+  }
+  .title-row { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  h1 { font-size: 20px; margin: 0; letter-spacing: -.02em; }
+  .sub { color: var(--muted); font-size: 12.5px; }
+  .avail-stamp { margin-left: auto; font-size: 11.5px; color: var(--muted); }
+  .avail-stamp b { color: var(--accent); font-weight: 600; }
+
+  .controls { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; align-items: center; }
+  .search {
+    flex: 1 1 180px; max-width: 300px;
+    padding: 7px 12px; border: 1px solid var(--line); border-radius: 10px;
+    font-size: 14px; background: var(--bg); color: var(--ink); outline: none;
+  }
+  .search:focus { border-color: var(--accent); }
+  select {
+    padding: 7px 8px; border: 1px solid var(--line); border-radius: 10px;
+    font-size: 13px; background: var(--bg); color: var(--ink);
+  }
+  .toggle {
+    padding: 7px 12px; border: 1px solid var(--line); border-radius: 10px;
+    font-size: 13px; background: var(--bg); cursor: pointer; user-select: none;
+    color: var(--ink);
+  }
+  .toggle.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  .cats { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
+  .cat {
+    padding: 5px 11px; border-radius: 999px; background: var(--chip);
+    font-size: 13px; cursor: pointer; border: 1px solid transparent; user-select: none;
+    white-space: nowrap;
+  }
+  .cat.on { background: var(--ink); color: #fff; }
+
+  .layout { flex: 1; display: flex; min-height: 0; }
+  .list {
+    width: 400px; min-width: 320px; overflow-y: auto; padding: 12px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .count { font-size: 12px; color: var(--muted); padding: 0 4px; }
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 12px 14px; box-shadow: var(--shadow); cursor: pointer;
+    transition: border-color .15s;
+  }
+  .card:hover, .card.hl { border-color: var(--accent); }
+  .card-top { display: flex; align-items: baseline; gap: 8px; }
+  .card-name { font-weight: 650; font-size: 15px; }
+  .card-emoji { font-size: 15px; }
+  .card-price { color: var(--muted); font-size: 12.5px; margin-left: auto; }
+  .card-meta { display: flex; gap: 8px; align-items: center; margin-top: 3px; font-size: 12.5px; color: var(--muted); flex-wrap: wrap; }
+  .stars { color: var(--amber); font-weight: 650; }
+  .card-note { font-size: 12.5px; color: var(--muted); margin-top: 4px; font-style: italic; }
+  .slots { display: flex; gap: 5px; margin-top: 8px; flex-wrap: wrap; align-items: center; }
+  .slot {
+    background: var(--accent-soft); color: var(--accent); font-weight: 600;
+    font-size: 11.5px; padding: 3px 8px; border-radius: 7px; text-decoration: none;
+  }
+  .slot:hover { background: var(--accent); color: #fff; }
+  .no-slots { font-size: 11.5px; color: #b91c1c; }
+  .unknown-slots { font-size: 11.5px; color: var(--muted); }
+  .walkin { font-size: 11.5px; color: var(--accent); font-weight: 600; }
+  .book {
+    margin-left: auto; font-size: 12px; font-weight: 600; text-decoration: none;
+    color: var(--accent); border: 1px solid var(--accent); padding: 3px 10px; border-radius: 7px;
+  }
+  .book:hover { background: var(--accent); color: #fff; }
+
+  #map { flex: 1; min-height: 0; }
+  .marker-pin {
+    display: flex; align-items: center; justify-content: center;
+    width: 30px; height: 30px; border-radius: 50% 50% 50% 4px;
+    background: #fff; border: 2px solid var(--accent);
+    box-shadow: 0 2px 6px rgba(0,0,0,.25); font-size: 15px;
+    transform: rotate(0deg);
+  }
+  .marker-pin.dim { opacity: .25; filter: grayscale(1); }
+  .leaflet-popup-content { margin: 10px 14px; font-family: inherit; }
+  .pop-name { font-weight: 700; font-size: 14px; }
+  .pop-meta { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .pop-slots { margin-top: 6px; display: flex; gap: 4px; flex-wrap: wrap; }
+
+  .mobile-switch { display: none; }
+  @media (max-width: 760px) {
+    .layout { flex-direction: column; }
+    .list { width: 100%; min-width: 0; flex: 1; }
+    #map { height: 44vh; flex: none; order: -1; }
+    body.list-hidden .list { display: none; }
+    body.list-hidden #map { height: calc(100vh - 190px); }
+    .mobile-switch {
+      display: block; position: fixed; bottom: 14px; left: 50%; transform: translateX(-50%);
+      z-index: 2000; background: var(--ink); color: #fff; border: none;
+      padding: 9px 18px; border-radius: 999px; font-size: 13.5px; font-weight: 600;
+      box-shadow: 0 4px 14px rgba(0,0,0,.3); cursor: pointer;
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="title-row">
+    <h1>🗽 Downtown Eats</h1>
+    <span class="sub">Gramercy · East Village · LES · West Village</span>
+    <span class="avail-stamp" id="stamp"></span>
+  </div>
+  <div class="controls">
+    <input class="search" id="q" type="search" placeholder="Search restaurants…">
+    <select id="minRating">
+      <option value="0">Any rating</option>
+      <option value="4">4.0★+</option>
+      <option value="4.3">4.3★+</option>
+      <option value="4.5">4.5★+</option>
+      <option value="4.7">4.7★+</option>
+    </select>
+    <select id="price">
+      <option value="">Any price</option>
+      <option value="$">$</option>
+      <option value="$$">$$</option>
+      <option value="$$$">$$$</option>
+      <option value="$$$$">$$$$</option>
+    </select>
+    <select id="platform">
+      <option value="">Any booking</option>
+      <option value="resy">Resy</option>
+      <option value="opentable">OpenTable</option>
+      <option value="sevenrooms">SevenRooms</option>
+      <option value="walk-in">Walk-in</option>
+    </select>
+    <button class="toggle" id="availToggle">Free tables today</button>
+  </div>
+  <div class="cats" id="cats"></div>
+</header>
+
+<div class="layout">
+  <div class="list" id="list"></div>
+  <div id="map"></div>
+</div>
+<button class="mobile-switch" id="mswitch">Hide list</button>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="data/restaurants.js"></script>
+<script src="data/availability.js"></script>
+<script>
+const CATS = [
+  { key: "pizza",         label: "🍕 Pizza" },
+  { key: "bagels",        label: "🥯 Bagels & Bakery" },
+  { key: "sushi",         label: "🍣 Sushi" },
+  { key: "asian",         label: "🍜 Asian" },
+  { key: "mediterranean", label: "🧆 Middle Eastern" },
+  { key: "american",      label: "🍳 American" },
+  { key: "italian",       label: "🍝 Italian" },
+  { key: "mexican",       label: "🌮 Mexican" },
+];
+const EMOJI = Object.fromEntries(CATS.map(c => [c.key, c.label.split(" ")[0]]));
+
+const DATA = (window.RESTAURANTS || []).filter(r => r.lat && r.lng);
+const AV = window.AVAILABILITY || null;
+
+const state = { cat: null, q: "", minRating: 0, price: "", platform: "", availOnly: false };
+
+// ---- availability helpers ----
+function todayKey() {
+  const d = new Date();
+  return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0");
+}
+function slotsFor(r) {
+  if (!AV || !AV.days) return null;               // no data at all
+  const day = AV.days[todayKey()];
+  if (!day) return null;                          // stale data
+  const s = day[r.name];
+  return s === undefined ? null : s;              // null=unchecked, []=full, [..]=slots
+}
+function upcomingSlots(r) {
+  const s = slotsFor(r);
+  if (!s) return s;
+  const now = new Date();
+  const cur = String(now.getHours()).padStart(2,"0") + ":" + String(now.getMinutes()).padStart(2,"0");
+  return s.filter(t => t >= cur);
+}
+function displaySlots(r) {
+  const s = upcomingSlots(r) || [];
+  const dinner = s.filter(t => t >= "17:00");
+  return (dinner.length ? dinner : s).slice(0, 5);
+}
+function availState(r) {
+  if (r.platform === "walk-in" || r.platform === "other") return "walkin";
+  const s = upcomingSlots(r);
+  if (s === null) return "unknown";
+  return s.length ? "open" : "full";
+}
+
+// ---- filtering ----
+function visible() {
+  return DATA.filter(r => {
+    if (state.cat && !r.categories.includes(state.cat)) return false;
+    if (state.q && !(r.name + " " + (r.note||"") + " " + r.address).toLowerCase().includes(state.q)) return false;
+    if (state.minRating && (!r.rating || r.rating < state.minRating)) return false;
+    if (state.price && r.price !== state.price) return false;
+    if (state.platform && r.platform !== state.platform) return false;
+    if (state.availOnly && availState(r) !== "open") return false;
+    return true;
+  });
+}
+
+// ---- map ----
+const map = L.map("map", { zoomSnap: .5 }).setView([40.729, -73.9885], 14);
+L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+  attribution: '&copy; OpenStreetMap &copy; CARTO', maxZoom: 19,
+}).addTo(map);
+
+const markers = new Map();
+DATA.forEach(r => {
+  const icon = L.divIcon({
+    className: "", iconSize: [30, 30], iconAnchor: [15, 28], popupAnchor: [0, -26],
+    html: `<div class="marker-pin" id="pin-${r.id}">${EMOJI[r.categories[0]] || "📍"}</div>`,
+  });
+  const m = L.marker([r.lat, r.lng], { icon }).addTo(map);
+  m.bindPopup(popupHtml(r));
+  m.on("click", () => {
+    const el = document.getElementById("card-" + r.id);
+    if (el) { el.scrollIntoView({ behavior: "smooth", block: "center" }); flash(el); }
+  });
+  markers.set(r.id, m);
+});
+
+function popupHtml(r) {
+  const st = availState(r);
+  let av = "";
+  if (st === "open") av = `<div class="pop-slots">${displaySlots(r).slice(0,4).map(t => `<span class="slot">${fmtTime(t)}</span>`).join("")}</div>`;
+  else if (st === "full") av = `<div class="pop-meta" style="color:#b91c1c">Nothing left today</div>`;
+  else if (st === "walkin") av = `<div class="pop-meta walkin">Walk-in</div>`;
+  return `<div class="pop-name">${EMOJI[r.categories[0]]||""} ${r.name}</div>
+    <div class="pop-meta">${r.rating ? "★ " + r.rating.toFixed(1) : ""} ${r.price||""} · ${r.address}</div>
+    ${r.note ? `<div class="pop-meta"><i>${r.note}</i></div>` : ""}${av}
+    ${r.book_url ? `<div style="margin-top:6px"><a class="book" href="${r.book_url}" target="_blank" rel="noopener">${bookLabel(r)}</a></div>` : ""}`;
+}
+function bookLabel(r) {
+  if (r.platform === "resy") return "Book on Resy";
+  if (r.platform === "opentable") return "Book on OpenTable";
+  if (r.platform === "sevenrooms") return "Reserve";
+  if ((r.book_url || "").includes("exploretock")) return "Book on Tock";
+  return "Website";
+}
+function fmtTime(t) {
+  const [h, m] = t.split(":").map(Number);
+  const ap = h >= 12 ? "pm" : "am";
+  return ((h % 12) || 12) + ":" + String(m).padStart(2,"0") + ap;
+}
+function flash(el) {
+  el.classList.add("hl");
+  setTimeout(() => el.classList.remove("hl"), 1600);
+}
+
+// ---- list ----
+function render() {
+  const rows = visible().slice().sort((a, b) => (b.rating||0) - (a.rating||0));
+  const list = document.getElementById("list");
+  list.innerHTML = `<div class="count">${rows.length} spot${rows.length===1?"":"s"}${state.availOnly ? " with tables tonight" : ""}</div>` +
+    rows.map(r => {
+      const st = availState(r);
+      let av;
+      if (st === "walkin") av = `<span class="walkin">Walk-in</span>`;
+      else if (st === "open") av = displaySlots(r).map(t =>
+        `<a class="slot" href="${r.book_url}" target="_blank" rel="noopener">${fmtTime(t)}</a>`).join("");
+      else if (st === "full") av = `<span class="no-slots">Nothing left today (2 ppl)</span>`;
+      else av = `<span class="unknown-slots">Availability not checked</span>`;
+      return `<div class="card" id="card-${r.id}" onclick="focusPin(${r.id})">
+        <div class="card-top">
+          <span class="card-emoji">${r.categories.map(c => EMOJI[c]).join("")}</span>
+          <span class="card-name">${r.name}</span>
+          <span class="card-price">${r.price || ""}</span>
+        </div>
+        <div class="card-meta">
+          ${r.rating ? `<span class="stars">★ ${r.rating.toFixed(1)}</span>${r.reviews ? `<span>(${r.reviews.toLocaleString()})</span>` : ""}` : ""}
+          <span>·</span><span>${r.address.replace(/, New York.*/i, "")}</span>
+        </div>
+        ${r.note ? `<div class="card-note">${r.note}</div>` : ""}
+        <div class="slots">${av}
+          ${r.book_url ? `<a class="book" href="${r.book_url}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${bookLabel(r)}</a>` : ""}
+        </div>
+      </div>`;
+    }).join("");
+
+  const vis = new Set(rows.map(r => r.id));
+  markers.forEach((m, id) => {
+    const pin = document.getElementById("pin-" + id);
+    if (pin) pin.classList.toggle("dim", !vis.has(id));
+  });
+}
+
+function focusPin(id) {
+  const r = DATA.find(x => x.id === id);
+  if (!r) return;
+  map.flyTo([r.lat, r.lng], Math.max(map.getZoom(), 15), { duration: .6 });
+  markers.get(id).openPopup();
+}
+
+// ---- controls ----
+const catsEl = document.getElementById("cats");
+catsEl.innerHTML = `<span class="cat on" data-cat="">All</span>` +
+  CATS.map(c => `<span class="cat" data-cat="${c.key}">${c.label}</span>`).join("");
+catsEl.addEventListener("click", e => {
+  const el = e.target.closest(".cat"); if (!el) return;
+  catsEl.querySelectorAll(".cat").forEach(x => x.classList.remove("on"));
+  el.classList.add("on");
+  state.cat = el.dataset.cat || null;
+  render();
+});
+document.getElementById("q").addEventListener("input", e => { state.q = e.target.value.toLowerCase(); render(); });
+document.getElementById("minRating").addEventListener("change", e => { state.minRating = +e.target.value; render(); });
+document.getElementById("price").addEventListener("change", e => { state.price = e.target.value; render(); });
+document.getElementById("platform").addEventListener("change", e => { state.platform = e.target.value; render(); });
+document.getElementById("availToggle").addEventListener("click", e => {
+  state.availOnly = !state.availOnly;
+  e.target.classList.toggle("on", state.availOnly);
+  render();
+});
+document.getElementById("mswitch").addEventListener("click", e => {
+  document.body.classList.toggle("list-hidden");
+  e.target.textContent = document.body.classList.contains("list-hidden") ? "Show list" : "Hide list";
+  setTimeout(() => map.invalidateSize(), 50);
+});
+
+// ---- stamp ----
+(function () {
+  const el = document.getElementById("stamp");
+  if (AV && AV.generated_at) {
+    const d = new Date(AV.generated_at);
+    const fresh = AV.days && AV.days[todayKey()];
+    el.innerHTML = fresh
+      ? `Tables for <b>2 tonight</b> · checked ${d.toLocaleString([], { month:"short", day:"numeric", hour:"numeric", minute:"2-digit" })}`
+      : `Availability data is stale (last checked ${d.toLocaleDateString()})`;
+  } else {
+    el.textContent = "Availability not yet checked";
+  }
+})();
+
+render();
+</script>
+</body>
+</html>
