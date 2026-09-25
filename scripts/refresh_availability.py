@@ -152,7 +152,7 @@ def sevenrooms_slots(url, day, party):
 # ---------------- main ----------------
 def main():
     party = 2
-    ndays = 1
+    ndays = 3
     args = sys.argv[1:]
     if "--party" in args:
         party = int(args[args.index("--party") + 1])

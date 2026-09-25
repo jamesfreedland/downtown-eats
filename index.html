@@ -168,7 +168,8 @@
       <option value="sevenrooms">SevenRooms</option>
       <option value="walk-in">Walk-in</option>
     </select>
-    <button class="toggle" id="availToggle">Free tables today</button>
+    <select id="daySel"></select>
+    <button class="toggle" id="availToggle">Free tables</button>
   </div>
   <div class="cats" id="cats"></div>
 </header>
@@ -199,23 +200,38 @@ const EMOJI = Object.fromEntries(CATS.map(c => [c.key, c.label.split(" ")[0]]));
 const DATA = (window.RESTAURANTS || []).filter(r => r.lat && r.lng);
 const AV = window.AVAILABILITY || null;
 
-const state = { cat: null, q: "", minRating: 0, price: "", platform: "", availOnly: false, source: "" };
+const state = { cat: null, q: "", minRating: 0, price: "", platform: "", availOnly: false, source: "", day: null };
+const DAYS = (AV && AV.days) ? Object.keys(AV.days).sort() : [];
+state.day = DAYS.includes(todayKey0()) ? todayKey0() : (DAYS[DAYS.length - 1] || todayKey0());
+function todayKey0() {
+  const d = new Date();
+  return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0");
+}
 
 // ---- availability helpers ----
 function todayKey() {
   const d = new Date();
   return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0");
 }
+function keyOffset(n) {
+  const d = new Date(); d.setDate(d.getDate() + n);
+  return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0");
+}
+function dayLabel(k) {
+  if (k === todayKey()) return "Tonight";
+  if (k === keyOffset(1)) return "Tomorrow";
+  return new Date(k + "T12:00:00").toLocaleDateString([], { weekday: "short", month: "short", day: "numeric" });
+}
 function slotsFor(r) {
   if (!AV || !AV.days) return null;               // no data at all
-  const day = AV.days[todayKey()];
+  const day = AV.days[state.day];
   if (!day) return null;                          // stale data
   const s = day[r.name];
   return s === undefined ? null : s;              // null=unchecked, []=full, [..]=slots
 }
 function upcomingSlots(r) {
   const s = slotsFor(r);
-  if (!s) return s;
+  if (!s || state.day !== todayKey()) return s;   // only filter past times for today
   const now = new Date();
   const cur = String(now.getHours()).padStart(2,"0") + ":" + String(now.getMinutes()).padStart(2,"0");
   return s.filter(t => t >= cur);
@@ -272,7 +288,7 @@ function popupHtml(r) {
   const st = availState(r);
   let av = "";
   if (st === "open") av = `<div class="pop-slots">${displaySlots(r).slice(0,4).map(t => `<span class="slot">${fmtTime(t)}</span>`).join("")}</div>`;
-  else if (st === "full") av = `<div class="pop-meta" style="color:#b91c1c">Nothing left today</div>`;
+  else if (st === "full") av = `<div class="pop-meta" style="color:#b91c1c">Booked out</div>`;
   else if (st === "walkin") av = `<div class="pop-meta walkin">Walk-in</div>`;
   return `<div class="pop-name">${EMOJI[r.categories[0]]||""} ${r.name}</div>
     <div class="pop-meta">${r.rating ? "★ " + r.rating.toFixed(1) : ""} ${r.price||""} · ${r.address}</div>
@@ -300,14 +316,14 @@ function flash(el) {
 function render() {
   const rows = visible().slice().sort((a, b) => (b.rating||0) - (a.rating||0));
   const list = document.getElementById("list");
-  list.innerHTML = `<div class="count">${rows.length} spot${rows.length===1?"":"s"}${state.availOnly ? " with tables tonight" : ""}</div>` +
+  list.innerHTML = `<div class="count">${rows.length} spot${rows.length===1?"":"s"}${state.availOnly ? ` with tables ${dayLabel(state.day).toLowerCase()}` : ""}</div>` +
     rows.map(r => {
       const st = availState(r);
       let av;
       if (st === "walkin") av = `<span class="walkin">Walk-in</span>`;
       else if (st === "open") av = displaySlots(r).map(t =>
         `<a class="slot" href="${r.book_url}" target="_blank" rel="noopener">${fmtTime(t)}</a>`).join("");
-      else if (st === "full") av = `<span class="no-slots">Nothing left today (2 ppl)</span>`;
+      else if (st === "full") av = `<span class="no-slots">Booked out (2 ppl)</span>`;
       else av = `<span class="unknown-slots">Availability not checked</span>`;
       return `<div class="card" id="card-${r.id}" onclick="focusPin(${r.id})">
         <div class="card-top">
@@ -357,6 +373,17 @@ document.getElementById("minRating").addEventListener("change", e => { state.min
 document.getElementById("price").addEventListener("change", e => { state.price = e.target.value; render(); });
 document.getElementById("platform").addEventListener("change", e => { state.platform = e.target.value; render(); });
 document.getElementById("source").addEventListener("change", e => { state.source = e.target.value; render(); });
+(function () {
+  const sel = document.getElementById("daySel");
+  const opts = DAYS.filter(k => k >= todayKey());
+  if (opts.length < 2) { sel.style.display = "none"; return; }
+  sel.innerHTML = opts.map(k => `<option value="${k}"${k === state.day ? " selected" : ""}>${dayLabel(k)}</option>`).join("");
+  sel.addEventListener("change", e => {
+    state.day = e.target.value;
+    markers.forEach((m, id) => { const r = DATA.find(x => x.id === id); if (m.getPopup()) m.setPopupContent(popupHtml(r)); });
+    render();
+  });
+})();
 document.getElementById("availToggle").addEventListener("click", e => {
   state.availOnly = !state.availOnly;
   e.target.classList.toggle("on", state.availOnly);
@@ -381,7 +408,7 @@ try {
     const d = new Date(AV.generated_at);
     const fresh = AV.days && AV.days[todayKey()];
     el.innerHTML = fresh
-      ? `Tables for <b>2 tonight</b> · checked ${d.toLocaleString([], { month:"short", day:"numeric", hour:"numeric", minute:"2-digit" })}`
+      ? `Tables for <b>party of ${AV.party_size || 2}</b> · checked ${d.toLocaleString([], { month:"short", day:"numeric", hour:"numeric", minute:"2-digit" })}`
       : `Availability data is stale (last checked ${d.toLocaleDateString()})`;
   } else {
     el.textContent = "Availability not yet checked";
