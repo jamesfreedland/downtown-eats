@@ -151,11 +151,11 @@ def sevenrooms_slots(url, day, party):
 
 # ---------------- main ----------------
 def main():
-    party = 2
+    parties = [2, 4]
     ndays = 3
     args = sys.argv[1:]
     if "--party" in args:
-        party = int(args[args.index("--party") + 1])
+        parties = [int(args[args.index("--party") + 1])]
     if "--days" in args:
         ndays = int(args[args.index("--days") + 1])
 
@@ -167,46 +167,54 @@ def main():
     errors = 0
     for offset in range(ndays):
         day = (date.today() + timedelta(days=offset)).isoformat()
+        prev_day = prev_days.get(day, {})
+        # old format was day -> {venue: slots}; treat it as party-of-2 data
+        if prev_day and not all(isinstance(v, dict) for v in prev_day.values()):
+            prev_day = {"2": prev_day}
         out = {}
-        # venues with no data yet go first, so rate-limited runs fill gaps
-        ordered = sorted(restaurants, key=lambda r: r["name"] in prev_days.get(day, {}))
-        for r in ordered:
-            name, plat = r["name"], r.get("platform")
-            if not ((plat == "resy" and r.get("resy_slug")) or
-                    (plat in ("opentable", "sevenrooms") and r.get("book_url"))):
-                continue  # walk-in / other: skip
-            slots = None
-            try:
-                if plat == "resy":
-                    slots = resy_slots(r["resy_slug"], day, party)
-                elif plat == "sevenrooms":
-                    slots = sevenrooms_slots(r["book_url"], day, party)
+        for party in parties:
+            prev_p = prev_day.get(str(party), {})
+            pout = {}
+            # venues with no data yet go first, so rate-limited runs fill gaps
+            ordered = sorted(restaurants, key=lambda r: r["name"] in prev_p)
+            for r in ordered:
+                name, plat = r["name"], r.get("platform")
+                if not ((plat == "resy" and r.get("resy_slug")) or
+                        (plat in ("opentable", "sevenrooms") and r.get("book_url"))):
+                    continue  # walk-in / other: skip
+                slots = None
+                try:
+                    if plat == "resy":
+                        slots = resy_slots(r["resy_slug"], day, party)
+                    elif plat == "sevenrooms":
+                        slots = sevenrooms_slots(r["book_url"], day, party)
+                    else:
+                        slots = opentable_slots(r["book_url"], day, party)
+                except urllib.error.HTTPError as e:
+                    print(f"  ! {name} (p{party}): HTTP {e.code}", file=sys.stderr)
+                except Exception as e:
+                    print(f"  ! {name} (p{party}): {e}", file=sys.stderr)
+                if slots is None:
+                    # keep the previous run's value rather than dropping the venue
+                    if name in prev_p:
+                        pout[name] = prev_p[name]
+                    errors += 1
                 else:
-                    slots = opentable_slots(r["book_url"], day, party)
-            except urllib.error.HTTPError as e:
-                print(f"  ! {name}: HTTP {e.code}", file=sys.stderr)
-            except Exception as e:
-                print(f"  ! {name}: {e}", file=sys.stderr)
-            if slots is None:
-                # keep the previous run's value rather than dropping the venue
-                if day in prev_days and name in prev_days[day]:
-                    out[name] = prev_days[day][name]
-                errors += 1
-            else:
-                out[name] = slots
-                print(f"  {name}: {len(slots)} slot(s)")
-            time.sleep(1.0)
+                    pout[name] = slots
+                    print(f"  {name} (p{party}): {len(slots)} slot(s)")
+                time.sleep(1.0)
+            out[str(party)] = pout
         days[day] = out
 
     payload = {
         "generated_at": datetime.now().astimezone().isoformat(timespec="seconds"),
-        "party_size": party,
+        "party_sizes": parties,
         "days": days,
     }
     dest = ROOT / "data" / "availability.js"
     dest.write_text("window.AVAILABILITY = " + json.dumps(payload, ensure_ascii=False, indent=1) + ";\n")
-    checked = sum(len(v) for v in days.values())
-    print(f"Wrote {dest} — {checked} venues, {errors} error(s), party of {party}.")
+    checked = sum(len(p) for v in days.values() for p in v.values())
+    print(f"Wrote {dest} — {checked} venue-day-size checks, {errors} error(s), parties {parties}.")
 
 if __name__ == "__main__":
     main()
