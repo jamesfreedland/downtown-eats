@@ -1,2 +1,7 @@
 .DS_Store
 data/.resy_ids.json
+.env
+data/watches.json
+data/.watch_state.json
+watch.log
+watch.err.log

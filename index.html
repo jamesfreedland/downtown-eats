@@ -170,6 +170,7 @@
     </select>
     <select id="partySel"></select>
     <select id="daySel"></select>
+    <select id="timeSel"></select>
     <button class="toggle" id="availToggle">Free tables</button>
   </div>
   <div class="cats" id="cats"></div>
@@ -182,8 +183,8 @@
 <button class="mobile-switch" id="mswitch">Hide map</button>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="data/restaurants.js?v=20260925"></script>
-<script src="data/availability.js?v=20260925"></script>
+<script src="data/restaurants.js?v=20260926"></script>
+<script src="data/availability.js?v=20260926"></script>
 <script>
 const CATS = [
   { key: "pizza",         label: "🍕 Pizza" },
@@ -201,7 +202,7 @@ const EMOJI = Object.fromEntries(CATS.map(c => [c.key, c.label.split(" ")[0]]));
 const DATA = (window.RESTAURANTS || []).filter(r => r.lat && r.lng);
 const AV = window.AVAILABILITY || null;
 
-const state = { cat: null, q: "", minRating: 0, price: "", platform: "", availOnly: false, source: "", day: null, party: "2" };
+const state = { cat: null, q: "", minRating: 0, price: "", platform: "", availOnly: false, source: "", day: null, party: "2", time: "" };
 const DAYS = (AV && AV.days) ? Object.keys(AV.days).sort() : [];
 // normalize: old format (day -> {venue: slots}) becomes {"2": {venue: slots}}
 const DAYS_DATA = {};
@@ -245,8 +246,16 @@ function upcomingSlots(r) {
   const cur = String(now.getHours()).padStart(2,"0") + ":" + String(now.getMinutes()).padStart(2,"0");
   return s.filter(t => t >= cur);
 }
+function toMin(t) { const [h, m] = t.split(":").map(Number); return h * 60 + m; }
+function nearTime(t, target) { return Math.abs(toMin(t) - target) <= 45; }
 function displaySlots(r) {
   const s = upcomingSlots(r) || [];
+  if (state.time) {
+    const target = toMin(state.time);
+    return s.filter(t => nearTime(t, target))
+            .sort((a, b) => Math.abs(toMin(a) - target) - Math.abs(toMin(b) - target))
+            .slice(0, 5).sort();
+  }
   const dinner = s.filter(t => t >= "17:00");
   return (dinner.length ? dinner : s).slice(0, 5);
 }
@@ -268,6 +277,10 @@ function visible() {
     if (state.price && r.price !== state.price) return false;
     if (state.platform && r.platform !== state.platform) return false;
     if (state.availOnly && availState(r) !== "open") return false;
+    if (state.time) {
+      const s = upcomingSlots(r);
+      if (!s || !s.some(t => nearTime(t, toMin(state.time)))) return false;
+    }
     return true;
   });
 }
@@ -333,7 +346,7 @@ function flash(el) {
 function render() {
   const rows = visible().slice().sort((a, b) => (b.rating||0) - (a.rating||0));
   const list = document.getElementById("list");
-  list.innerHTML = `<div class="count">${rows.length} spot${rows.length===1?"":"s"}${state.availOnly ? ` with tables ${dayLabel(state.day).toLowerCase()}` : ""}</div>` +
+  list.innerHTML = `<div class="count">${rows.length} spot${rows.length===1?"":"s"}${state.time ? ` with a table around ${fmtTime(state.time)} ${dayLabel(state.day).toLowerCase()}` : state.availOnly ? ` with tables ${dayLabel(state.day).toLowerCase()}` : ""}</div>` +
     rows.map(r => {
       const st = availState(r);
       let av;
@@ -402,6 +415,17 @@ document.getElementById("source").addEventListener("change", e => { state.source
       render();
     });
   }
+})();
+(function () {
+  const tsel = document.getElementById("timeSel");
+  const times = ["12:00","12:30","13:00","13:30","14:00","17:00","17:30","18:00","18:30","19:00","19:30","20:00","20:30","21:00","21:30"];
+  tsel.innerHTML = `<option value="">Any time</option>` +
+    times.map(t => `<option value="${t}">~${fmtTime(t)}</option>`).join("");
+  tsel.addEventListener("change", e => {
+    state.time = e.target.value;
+    markers.forEach((m, id) => { const r = DATA.find(x => x.id === id); if (m.getPopup()) m.setPopupContent(popupHtml(r)); });
+    render();
+  });
 })();
 (function () {
   const sel = document.getElementById("daySel");
