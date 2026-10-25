@@ -170,6 +170,7 @@
     </select>
     <select id="partySel"></select>
     <select id="daySel"></select>
+    <input type="date" id="dayCustom" style="display:none; padding:7px 8px; border:1px solid var(--line); border-radius:10px; font-size:13px; background:var(--bg); color:var(--ink); font-family:inherit;">
     <select id="timeSel"></select>
     <button class="toggle" id="availToggle">Free tables</button>
   </div>
@@ -183,8 +184,8 @@
 <button class="mobile-switch" id="mswitch">Hide map</button>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="data/restaurants.js?v=20260928"></script>
-<script src="data/availability.js?v=20260928"></script>
+<script src="data/restaurants.js?v=20261025"></script>
+<script src="data/availability.js?v=20261025"></script>
 <script>
 const CATS = [
   { key: "pizza",         label: "🍕 Pizza" },
@@ -346,7 +347,8 @@ function flash(el) {
 function render() {
   const rows = visible().slice().sort((a, b) => (b.rating||0) - (a.rating||0));
   const list = document.getElementById("list");
-  list.innerHTML = `<div class="count">${rows.length} spot${rows.length===1?"":"s"}${state.time ? ` with a table around ${fmtTime(state.time)} ${dayLabel(state.day).toLowerCase()}` : state.availOnly ? ` with tables ${dayLabel(state.day).toLowerCase()}` : ""}</div>` +
+  const noData = state.day && !DAYS_DATA[state.day];
+  list.innerHTML = `<div class="count">${rows.length} spot${rows.length===1?"":"s"}${state.time ? ` with a table around ${fmtTime(state.time)} ${dayLabel(state.day).toLowerCase()}` : state.availOnly ? ` with tables ${dayLabel(state.day).toLowerCase()}` : ""}${noData ? ` — no slot data for ${dayLabel(state.day)}; Book buttons open each spot's live calendar for that date` : ""}</div>` +
     rows.map(r => {
       const st = availState(r);
       let av;
@@ -430,13 +432,26 @@ document.getElementById("source").addEventListener("change", e => { state.source
 (function () {
   const sel = document.getElementById("daySel");
   const opts = DAYS.filter(k => k >= todayKey());
-  if (opts.length < 2) { sel.style.display = "none"; return; }
-  sel.innerHTML = opts.map(k => `<option value="${k}"${k === state.day ? " selected" : ""}>${dayLabel(k)}</option>`).join("");
-  sel.addEventListener("change", e => {
-    state.day = e.target.value;
+  const custom = document.getElementById("dayCustom");
+  custom.min = todayKey();
+  sel.innerHTML = opts.map(k => `<option value="${k}"${k === state.day ? " selected" : ""}>${dayLabel(k)}</option>`).join("") +
+    `<option value="__custom">Pick a date…</option>`;
+  function setDay(d) {
+    state.day = d;
     markers.forEach((m, id) => { const r = DATA.find(x => x.id === id); if (m.getPopup()) m.setPopupContent(popupHtml(r)); });
     render();
+  }
+  sel.addEventListener("change", e => {
+    if (e.target.value === "__custom") {
+      custom.style.display = "";
+      if (custom.value && custom.value >= todayKey()) setDay(custom.value);
+      try { custom.showPicker(); } catch (err) { custom.focus(); }
+      return;
+    }
+    custom.style.display = "none";
+    setDay(e.target.value);
   });
+  custom.addEventListener("change", e => { if (e.target.value) setDay(e.target.value); });
 })();
 document.getElementById("availToggle").addEventListener("click", e => {
   state.availOnly = !state.availOnly;
